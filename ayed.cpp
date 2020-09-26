@@ -1,6 +1,6 @@
 /*
-Dada una pila y un valor I, desarrollar un procedimiento que inserte I como tercer valor de la pila. (Definir 
-parámetros y codificar).
+Idem ejercicio 60 pero retornando un parámetro con valor 'S' o 'N' según haya sido exitoso o no el requerimiento. 
+(Definir parámetros y codificar).
 */
 #include <iostream>
 #include "funciones.h"
@@ -8,7 +8,7 @@ parámetros y codificar).
 using namespace std;
 
 template <typename T>
-void Eliminar(Nodo<T>*&, T);
+char modificar(Nodo<T>*&);
 
 int main() {
 	Nodo<int>* Pila = NULL;
@@ -17,24 +17,17 @@ int main() {
 	{
 		Push(Pila, i);
 	}
-	Eliminar(Pila, 150);
-	while (Pila != NULL)
-	{
-		cout << "Elementos de la pila: " << Pop(Pila) << endl;
-	}
+	char res = modificar(Pila);
+	cout << "Resultado de la pila: " << res << endl;
 	return 0;
 }
-
-
 template <typename T>
-void Eliminar(Nodo<T>*& Pila, T x) {
-	T vec[3];
+char modificar(Nodo<T>*& pila) {
 	for (int i = 0; i < 3; i++)
 	{
-		vec[i] = Pop(Pila);
+		if (pila != NULL)
+			Pop(pila);
+		else return 'N';
 	}
-	Push(Pila, x);
-	Push(Pila, vec[1]);
-	Push(Pila, vec[0]);
-	return;
+	return 'S';
 }
