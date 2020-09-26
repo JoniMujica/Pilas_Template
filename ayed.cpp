@@ -1,6 +1,6 @@
 /*
-Dada una pila y un valor I, desarrollar un procedimiento que elimine los 2 primeros nodos de la pila y deje el valor I 
-como primero. (Definir parámetros y codificar).
+Dada una pila y un valor I, desarrollar un procedimiento que inserte I como tercer valor de la pila. (Definir 
+parámetros y codificar).
 */
 #include <iostream>
 #include "funciones.h"
@@ -28,10 +28,13 @@ int main() {
 
 template <typename T>
 void Eliminar(Nodo<T>*& Pila, T x) {
-	for (int i = 0; i < 2; i++)
+	T vec[3];
+	for (int i = 0; i < 3; i++)
 	{
-		Pop(Pila);
+		vec[i] = Pop(Pila);
 	}
 	Push(Pila, x);
+	Push(Pila, vec[1]);
+	Push(Pila, vec[0]);
 	return;
 }
