@@ -1,6 +1,6 @@
 /*
-Dada una pila y un valor I, desarrollar un procedimiento que elimine los 2 primeros nodos de la pila y deje el valor I 
-como primero. (Definir parámetros y codificar).
+Dada una pila y dos valores X e I, desarrollar un procedimiento que inserte el valor X en la posición I de la pila si es 
+posible. (Definir parámetros y codificar).
 */
 #include <iostream>
 #include "funciones.h"
@@ -8,7 +8,7 @@ como primero. (Definir parámetros y codificar).
 using namespace std;
 
 template <typename T>
-void Eliminar(Nodo<T>*&, T);
+void Posicionar(Nodo<T>*& pila, T, int );
 
 int main() {
 	Nodo<int>* Pila = NULL;
@@ -17,7 +17,14 @@ int main() {
 	{
 		Push(Pila, i);
 	}
-	Eliminar(Pila, 150);
+
+	int a, b;
+	cout << "Ingrese un valor: " << endl;
+	cin >> a;
+	cout << "Ingrese la posicion: " << endl;
+	cin >> b;
+	Posicionar(Pila, a, b);
+
 	while (Pila != NULL)
 	{
 		cout << "Elementos de la pila: " << Pop(Pila) << endl;
@@ -25,13 +32,21 @@ int main() {
 	return 0;
 }
 
-
 template <typename T>
-void Eliminar(Nodo<T>*& Pila, T x) {
-	for (int i = 0; i < 2; i++)
+void Posicionar(Nodo<T>*& pila, T dat, int pos) {
+	Nodo<int>* aux = NULL;
+	int contador = 0;
+	while (pila != NULL && (contador < pos - 1))
 	{
-		Pop(Pila);
+		T x = Pop(pila);
+		Push(aux, x);
+		contador++;
 	}
-	Push(Pila, x);
-	return;
+	
+	Push(pila, dat);
+	while (aux != NULL)
+	{
+		T x = Pop(aux);
+		Push(pila, x);
+	}
 }
