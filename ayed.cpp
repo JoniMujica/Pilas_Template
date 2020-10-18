@@ -21,13 +21,16 @@ int main() {
 	Ordenar(Pila1, Pila2);
 	Mostrar_Pila(Pila1);
 	Mostrar_Pila(Pila2);
+	/*
 	if (Inversa(Pila1, Pila2) == false) {
 		cout << "El valor es falso" << endl;
 	}
 	else
 	{
 		cout << "El valor es verdadero" << endl;
-	}
+	} */
+
+	Inversa(Pila1, Pila2) ? cout << "La inversa es verdadera!" << endl : cout << "La inversa es falsa!" << endl;
 
 	return 0;
 }
