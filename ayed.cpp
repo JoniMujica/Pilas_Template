@@ -8,30 +8,81 @@ como primero. (Definir parámetros y codificar).
 using namespace std;
 
 template <typename T>
-void Eliminar(Nodo<T>*&, T);
+void Convertir(Nodo<T>*&, Nodo<T>*&);
+template <typename T>
+bool Verificar(Nodo<T>*&, Nodo<T>*&);
+template <typename T>
+void Mostrar_Pila(Nodo<T>*&);
 
 int main() {
-	Nodo<int>* Pila = NULL;
+	Nodo<char>* Pila1 = NULL;
+	Nodo<char>* Pila2 = NULL;
 
-	for (int i = 0; i < 10; i++)
-	{
-		Push(Pila, i);
+	Convertir(Pila1, Pila2);
+
+	cout << "================>>>PILA 1<<<========================" << endl;
+	Mostrar_Pila(Pila1);
+	Mostrar_Pila(Pila2);
+
+	if (Verificar(Pila1, Pila2) == false) {
+		cout << "El valor es falso" << endl;
 	}
-	Eliminar(Pila, 150);
-	while (Pila != NULL)
+	else
 	{
-		cout << "Elementos de la pila: " << Pop(Pila) << endl;
+		cout << "El valor es verdadero" << endl;
 	}
 	return 0;
 }
+template <typename T>
+void Convertir(Nodo<T>*& pila1, Nodo<T>*& pila2) {
+	char val;
+	int contador = 0;
+	do
+	{
+		cout << "Ingrese un valor" << endl;
+		cin >> val;
+		if (val != '.')
+		{
+			Push(pila1, val);
+			cout << "===================Valor Agregador a pila 1==============" << endl;
+			contador++;
+		}
+		
+	} while (val != '.');
 
+	for (int i = 0; i < contador; i++)
+	{
+		cout << "Ingrese un valor" << endl;
+		cin >> val;
+		if (val != '.')
+		{
+			Push(pila2, val);
+			cout << "===================Valor Agregador a pila 2==============" << endl;
+		}
+	}
+}
 
 template <typename T>
-void Eliminar(Nodo<T>*& Pila, T x) {
-	for (int i = 0; i < 2; i++)
+bool Verificar(Nodo<T>*& pila1 , Nodo<T>*& pila2) {
+	char dat;
+	Nodo<T>* aux1 = pila1;
+	Nodo<T>*aux2 = pila2;
+	while (aux1 != NULL && aux2 != NULL)
 	{
-		Pop(Pila);
+		dat = Pop(aux1);
+		if (dat == aux2->info)
+			return true;
 	}
-	Push(Pila, x);
-	return;
+	return false;
+}
+
+template <typename T>
+void Mostrar_Pila(Nodo<T>*& pila) {
+	Nodo<T>* Puntero_P = pila;
+
+	while (Puntero_P != NULL)
+	{
+		cout << Puntero_P->info;
+		Puntero_P = Puntero_P->sig;
+	}
 }
